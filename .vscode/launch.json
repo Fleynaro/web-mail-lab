@@ -8,7 +8,7 @@
             "name": "Start server",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceRoot}/mail/__main__.py",
+            "program": "${workspaceRoot}/start_mail_server.py",
             "console": "integratedTerminal",
         },
 

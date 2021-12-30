@@ -1,5 +1,11 @@
 import os
 
+# add parent directory to path
+import sys
+import pathlib
+parent_dir = pathlib.Path().resolve()
+sys.path.append(str(parent_dir))
+
 from flask import Flask
 from dotenv import load_dotenv
 
@@ -29,4 +35,5 @@ def run():
     app.run(
         host=os.environ.get('HOST', '0.0.0.0'),
         port=os.environ.get('PORT', 8080),
-        debug=int(os.environ.get('DEBUG', '1')))
+        debug=int(os.environ.get('DEBUG', '1')),
+        use_reloader=True)

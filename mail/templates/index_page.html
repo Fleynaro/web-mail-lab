@@ -2,12 +2,18 @@
 
 {% block main %}
 <form action="{{ url_for('message.add_message') }}" method="post" class="card border-secondary mb-3 send-form" data-test="send-form">
-  <fieldset>
+  <fieldset >
     <legend class="card-header h5 border-secondary bg-dark text-light">📩 Отправить письмо</legend>
     <div class="card-body">
-      <!--<div class="mb-3" data-test="send-alert">-->
-      <!--  <div class="alert alert-warning">Загрузка...</div>-->
-      <!--</div>-->
+      <div class="mb-3 d-none send-form__loading" data-test="send-alert">
+        <div class="alert alert-warning">Загрузка...</div>
+      </div>
+      <div class="mb-3 d-none send-form__success" data-test="send-alert">
+        <div class="alert alert-success">Сообщение отправлено</div>
+      </div>
+      <div class="mb-3 d-none send-form__error" data-test="send-alert">
+        <div class="alert alert-danger"></div>
+      </div>
 
       {% if error %}
         <div class="mb-3" data-test="send-alert">
@@ -36,13 +42,14 @@
   </fieldset>
 </form>
 
-<div class="message-form-clap">
-  <ul class="list-unstyled">
-    {% for message in messages %}
-      <li class="mb-3">
-        {% include 'message.html' %}
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+{% with message=tpl_message %}
+<template id="message-template">
+  {% include "message.html" %}
+</template>
+{% endwith %}
+<ul class="list-unstyled list-messages">
+  {% for message in messages %}
+    {% include 'message.html' %}
+  {% endfor %}
+</ul>
 {% endblock %}
