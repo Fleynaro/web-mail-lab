@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from services.message_service import MessageService, ValidationError
 
-message_blueprint = Blueprint('message', __name__, template_folder='../templates')
+message_blueprint = Blueprint('message', __name__, static_folder='../static', template_folder='../templates', static_url_path='/static/message')
 
 @message_blueprint.get('/')
 def index():

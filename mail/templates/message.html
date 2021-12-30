@@ -10,7 +10,7 @@
       {{ message.text }}
     </div>
     <div class="d-flex">
-      <form action="{{ url_for('message.clap_message', message_id=message.id) }}" method="post" class="ms-auto" data-test="message-clap-form">
+      <form action="{{ url_for('message.clap_message', message_id=message.id) }}" method="post" class="ms-auto message-clap-form" data-id="{{ message.id }}" data-test="message-clap-form">
         <input type="hidden" name="is_individual" value="{{ is_individual }}" />
         <button class="btn">👏🏻 <span data-test="clap-count">{{ message.claps }}</span></button>
       </form>

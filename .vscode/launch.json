@@ -11,5 +11,16 @@
             "program": "${workspaceRoot}/mail/__main__.py",
             "console": "integratedTerminal",
         },
+
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "breakOnLoad": true,
+            "pathMapping": {
+                "/static/message/": "${workspaceRoot}/mail/static",
+            }
+        },
     ]
 }
