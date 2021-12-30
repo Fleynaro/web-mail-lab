@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from services.message_service import MessageService, ValidationError
 
-message_blueprint = Blueprint('messages', __name__, template_folder='../templates')
+message_blueprint = Blueprint('message', __name__, template_folder='../templates')
 
 @message_blueprint.get('/')
 def index():
@@ -36,7 +36,7 @@ def message_page(message_id: int):
         is_individual=True)
 
 
-@message_blueprint.post('/messages/<int:message_id>/clap')
+@message_blueprint.post('/messages/<int:message_id>/claps')
 def clap_message(message_id: int):
     message = MessageService.get_message_by_id(message_id)
     if message is None:
@@ -46,5 +46,5 @@ def clap_message(message_id: int):
     message_service.clap_message()
     
     if request.form['is_individual'] == 'True':
-        return redirect(url_for('messages.message_page', message_id=message_id))
+        return redirect(url_for('message.message_page', message_id=message_id))
     return redirect('/')

@@ -4,6 +4,7 @@ from flask import Flask
 from dotenv import load_dotenv
 
 from blueprints.message_blueprint import message_blueprint
+from blueprints.message_api_blueprint import message_api_blueprint
 
 from database import db_session, init_db
 
@@ -15,6 +16,7 @@ app.env = os.environ.get('FLASK_ENV', 'development')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'secret')
 
 app.register_blueprint(message_blueprint)
+app.register_blueprint(message_api_blueprint)
 
 
 @app.teardown_appcontext

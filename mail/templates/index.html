@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<form action="{{ url_for('messages.add_message') }}" method="post" class="card border-secondary mb-3" data-test="send-form">
+<form action="{{ url_for('message.add_message') }}" method="post" class="card border-secondary mb-3" data-test="send-form">
   <fieldset>
     <legend class="card-header h5 border-secondary bg-dark text-light">📩 Отправить письмо</legend>
     <div class="card-body">
