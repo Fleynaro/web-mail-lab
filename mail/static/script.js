@@ -208,4 +208,6 @@ function init() {
     }
 }
 
-init();
+if (window.confirm("Enable ajax?")) {
+    init();
+}

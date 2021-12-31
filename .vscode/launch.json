@@ -22,5 +22,18 @@
                 "/static/message/": "${workspaceRoot}/mail/static",
             }
         },
+
+        {
+            "name": "Launch Chrome SPA",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/spa/src",
+            "breakOnLoad": true,
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*",
+                "webpack:///./src/*": "${webRoot}/*",
+            }
+        },
     ]
 }
