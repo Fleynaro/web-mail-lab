@@ -165,7 +165,7 @@ async function handleClapSubmit(event) {
     try {
         const newCount = await clapMessage(messageId);
         
-        if(document.querySelector('#message-template')) {
+        if(document.querySelector('ul.list-messages')) {
             // update list of messages
             const messages = await getMessages();
 
@@ -202,7 +202,7 @@ function init() {
         createForm.addEventListener('submit', handleCreateSubmit);
     }
 
-    const clapForm = document.querySelector('ul.list-messages');
+    const clapForm = document.querySelector('.message-container');
     if(clapForm) {
         clapForm.addEventListener('submit', handleClapSubmit);
     }

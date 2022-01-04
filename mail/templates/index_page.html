@@ -44,12 +44,16 @@
 
 {% with message=tpl_message %}
 <template id="message-template">
-  {% include "message.html" %}
+  <li class="mb-3">
+    {% include "message.html" %}
+  </li>
 </template>
 {% endwith %}
-<ul class="list-unstyled list-messages">
+<ul class="list-unstyled list-messages message-container">
   {% for message in messages %}
-    {% include 'message.html' %}
+    <li class="mb-3">
+      {% include 'message.html' %}
+    </li>
   {% endfor %}
 </ul>
 {% endblock %}
