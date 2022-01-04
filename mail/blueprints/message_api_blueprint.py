@@ -14,6 +14,14 @@ class MessageDto:
         self.claps = message.claps
 
 
+@message_api_blueprint.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', '*')
+    response.headers.add('Access-Control-Allow-Methods', '*')
+    return response
+
+
 @message_api_blueprint.get('')
 def api_get_messages():
     messages = MessageService.get_all_messages()

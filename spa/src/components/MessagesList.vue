@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <messages-list-item v-for="message in messages" :key="message" :message="message" />
+  <ul class="list-unstyled">
+    <messages-list-item v-for="message in messages" :key="message" :message="message" @clap="$emit('clap', message)" />
   </ul>
 </template>
 
@@ -15,14 +15,12 @@ export default {
   props: {
     messages: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
-  emits: ['clap']
+  emits: ['clap'],
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

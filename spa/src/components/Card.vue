@@ -1,26 +1,25 @@
 <template>
   <article class="card">
     <div class="card-body">
-        <header class="card-title">
-            <slot name="header"/>
-        </header>
-        
-        <div class="card-text">
-            <slot name="main"/>
-        </div>
+      <header class="card-title d-flex">
+        <slot name="header" />
+      </header>
 
-        <slot name="footer"/>
+      <div class="card-text">
+        <slot name="main" />
+      </div>
+
+      <div class="d-flex">
+        <slot name="footer" />
+      </div>
     </div>
-</article>
-
+  </article>
 </template>
 
 <script>
 export default {
-  name: 'Card'
+  name: 'Card',
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
