@@ -28,10 +28,10 @@ export default {
   mounted() {
     // pass bootstrap popover options from props
     // to the bootstrap popover instance
-    var options = this.$props
+    var options = this.$props;
     const a = 5;
     //var ele = this.$slots.default[0].elm
     //new Popover(ele,options)
-  }
+  },
 };
 </script>
