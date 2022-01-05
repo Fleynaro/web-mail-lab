@@ -35,5 +35,12 @@
                 "webpack:///./src/*": "${webRoot}/*",
             }
         },
+    ],
+
+    "compounds": [
+        {
+            "name": "Start all",
+            "configurations": ["Start server", "Launch Chrome SPA"]
+        }
     ]
 }

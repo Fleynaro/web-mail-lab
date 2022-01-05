@@ -1,15 +1,19 @@
 <template>
-  <messages-list v-if="messages" :messages="sortedMessages" @clap="clap" />
+  <message-sent-form ref="form" @submit="onSubmit" class="mb-3" />
+  <messages-list v-if="messages" :messages="sortedMessages" @clap="onClap" />
+  <alert v-else ref="alert" />
 </template>
 
 <script>
-import { getMessages, clapMessage } from '../api/messages.api';
+import { getMessages, createMessage, clapMessage } from '../api/messages.api';
+import Alert from '../components/Alert.vue';
+import MessageSentForm from '../components/MessageSentForm.vue';
 import MessagesList from '../components/MessagesList.vue';
 
 export default {
   name: 'PageHome',
 
-  components: { MessagesList },
+  components: { Alert, MessageSentForm, MessagesList },
 
   data() {
     return {
@@ -20,7 +24,12 @@ export default {
   created() {
     getMessages().then((messages) => {
       this.messages = messages;
+      this.$refs.alert.show = false;
     });
+  },
+
+  mounted() {
+    this.$refs.alert.loading();
   },
 
   computed: {
@@ -30,7 +39,19 @@ export default {
   },
 
   methods: {
-    clap(message) {
+    onSubmit() {
+      createMessage({
+        author: this.$refs.form.sender,
+        message: this.$refs.form.message,
+      }).then((message) => {
+        this.messages.push(message);
+        this.$refs.form.success(message);
+      }).catch((error) => {
+        this.$refs.form.error(error.response.data.message);
+      });
+    },
+
+    onClap(message) {
       clapMessage(message.id).then((info) => {
         message.claps = info.count;
       });

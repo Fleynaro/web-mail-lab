@@ -7,7 +7,11 @@
     </nav>
 
     <main class="container flex-fill my-3">
-      <router-view></router-view>
+      <router-view v-slot="{ Component }">
+        <keep-alive max="1">
+          <component :is="Component"/>
+        </keep-alive>
+      </router-view>
     </main>
 
     <footer class="bg-dark text-light py-3">

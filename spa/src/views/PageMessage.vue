@@ -9,20 +9,22 @@
     </template>
 
     <template v-slot:footer>
-      <message-clap-btn :message="message" @clap="clap" class="ms-auto" />
+      <message-clap-btn :message="message" @clap="onClap" class="ms-auto" />
     </template>
   </card>
+  <alert v-else ref="alert" />
 </template>
 
 <script>
 import { getMessage, clapMessage } from '../api/messages.api';
+import Alert from '../components/Alert.vue';
 import Card from '../components/Card.vue';
 import MessageClapBtn from '../components/MessageClapBtn.vue';
 
 export default {
   name: 'PageMessage',
 
-  components: { Card, MessageClapBtn },
+  components: { Alert, Card, MessageClapBtn },
 
   data() {
     return {
@@ -33,11 +35,16 @@ export default {
   created() {
     getMessage(this.$route.params.id).then((message) => {
       this.message = message;
+      this.$refs.alert.show = false;
     });
   },
 
+  mounted() {
+    this.$refs.alert.loading();
+  },
+
   methods: {
-    clap() {
+    onClap() {
       clapMessage(this.message.id).then((info) => {
         this.message.claps = info.count;
       });

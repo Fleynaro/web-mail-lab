@@ -21,7 +21,7 @@ class MessageService:
     def create_message(sender: str, text: str) -> Message:
         if len(sender) < 1 or len(sender) > 30:
             raise ValidationError('Имя отправителя должно быть от 1 до 30 символов')
-        if len(sender) < 1 or len(sender) > 1000:
+        if len(text) < 1 or len(text) > 1000:
             raise ValidationError('Текст сообщения должен быть от 1 до 1000 символов')
         message = Message(sender, text)
         db_session.add(message)
