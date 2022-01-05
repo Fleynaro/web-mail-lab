@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect
 from flask import session as flask_session
 
 from services.message_service import MessageService, ValidationError
 
-message_blueprint = Blueprint('message', __name__, static_folder='../static', template_folder='../templates', static_url_path='/static/message')
+from blueprints.message_api_blueprint import message_api_blueprint
+
+message_blueprint = Blueprint('message', __name__, static_folder='../static', template_folder='../templates', static_url_path='/static/message', url_prefix='')
 message_template = {
     'id': '1000000001',
     'sender': '{sender}',
@@ -11,12 +13,20 @@ message_template = {
     'claps': '{claps}'
 }
 
+
+# for global var in templates
+@message_blueprint.context_processor
+def inject_stage_and_region():
+    return dict(
+        tpl_message=message_template,
+        api_url_prefix=message_api_blueprint.url_prefix)
+
+
 @message_blueprint.get('/')
 def index():
     messages = MessageService.get_all_messages()
     return render_template('index_page.html',
-        messages=messages,
-        tpl_message=message_template)
+        messages=messages)
 
 
 @message_blueprint.post('/')
@@ -38,7 +48,7 @@ def add_message():
 def message_page(message_id: int):
     message = MessageService.get_message_by_id(message_id)
     if message is None:
-        return redirect('/')
+        return redirect(request.referrer)
 
     return render_template('message_page.html',
         message=message,
@@ -48,15 +58,10 @@ def message_page(message_id: int):
 @message_blueprint.post('/messages/<int:message_id>/claps')
 def clap_message(message_id: int):
     message = MessageService.get_message_by_id(message_id)
-    if message is None:
-        return redirect('/')
-
-    message_service = MessageService(message)
-    message_service.clap_message()
-    
-    if request.form['is_individual'] == 'True':
-        return redirect(url_for('message.message_page', message_id=message_id))
-    return redirect('/')
+    if message is not None:
+        message_service = MessageService(message)
+        message_service.clap_message()
+    return redirect(request.referrer)
 
 
 @message_blueprint.post('/ajax')

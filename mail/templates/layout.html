@@ -14,7 +14,7 @@
     <div class="d-flex flex-column bg-light min-vh-100">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand mx-auto" href="/">📨 Мини-почта 📨</a>
+          <a class="navbar-brand mx-auto" href="{{ url_for('message.index') }}">📨 Мини-почта 📨</a>
         </div>
       </nav>
 
@@ -45,11 +45,11 @@
       </footer>
     </div>
 
-    <script src="{{ url_for('message.static', filename='script.js') }}"></script>
     {% if session['ajax'] %}
     <script>
-      init();
+      const API_URL = '{{ api_url_prefix }}';
     </script>
+    <script src="{{ url_for('message.static', filename='script.js') }}"></script>
     {% endif %}
   </body>
 </html>

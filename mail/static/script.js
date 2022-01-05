@@ -1,16 +1,5 @@
 /*
     ==========================
-    GLOBAL VALUES
-    ==========================
-*/
-const API_URL = '/api'
-
-
-
-
-
-/*
-    ==========================
     EXCEPTIONS
     ==========================
 */
@@ -207,3 +196,5 @@ function init() {
         clapForm.addEventListener('submit', handleClapSubmit);
     }
 }
+
+init();
