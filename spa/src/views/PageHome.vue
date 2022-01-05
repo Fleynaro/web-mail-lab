@@ -1,5 +1,5 @@
 <template>
-  <message-sent-form ref="form" @submit="onSubmit" class="mb-3" />
+  <message-sent-form @submit="onSubmit" class="mb-3" />
   <messages-list v-if="messages" :messages="sortedMessages" @clap="onClap" />
   <alert v-else ref="alert" />
 </template>
@@ -34,30 +34,31 @@ export default {
 
   computed: {
     sortedMessages() {
-      return this.messages.sort((a, b) => b.claps - a.claps);
+      return [...this.messages].sort((a, b) => b.claps - a.claps);
     },
   },
 
   methods: {
-    onSubmit() {
+    onSubmit(form) {
       createMessage({
-        author: this.$refs.form.sender,
-        message: this.$refs.form.message,
-      }).then((message) => {
-        this.messages.push(message);
-        this.$refs.form.success(message);
-      }).catch((error) => {
-        this.$refs.form.error(error.response.data.message);
-      });
+        author: form.sender,
+        message: form.message,
+      })
+        .then((message) => {
+          this.messages.push(message);
+          form.success(message);
+        })
+        .catch((error) => {
+          form.error(error.response.data.message);
+        });
     },
 
-    onClap(message) {
-      clapMessage(message.id).then((info) => {
-        message.claps = info.count;
+    onClap(btn) {
+      clapMessage(btn.message.id).then((info) => {
+        btn.message.claps = info.count;
+        btn.disabled = false;
       });
     },
   },
 };
 </script>
-
-<style scoped></style>

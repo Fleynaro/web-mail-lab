@@ -3,7 +3,7 @@
     <fieldset :disabled="disabled">
       <legend class="card-header h5 border-secondary bg-dark text-light">📩 Отправить письмо</legend>
       <div class="card-body">
-        <alert ref="alert" />
+        <alert ref="alert" class="mb-3" />
 
         <div class="mb-3">
           <label for="sender" class="form-label">От кого:</label>
@@ -44,7 +44,7 @@ export default {
       e.preventDefault();
       this.$refs.alert.loading();
       this.disabled = true;
-      this.$emit('submit');
+      this.$emit('submit', this);
     },
 
     success(newMessage) {
@@ -61,5 +61,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

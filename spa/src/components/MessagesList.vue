@@ -1,6 +1,6 @@
 <template>
   <ul class="list-unstyled">
-    <messages-list-item v-for="message in messages" :key="message" :message="message" @clap="$emit('clap', message)" />
+    <messages-list-item v-for="message in messages" :key="message" :message="message" @clap="$emit('clap', $event)" />
   </ul>
 </template>
 
@@ -22,5 +22,3 @@ export default {
   emits: ['clap'],
 };
 </script>
-
-<style scoped></style>

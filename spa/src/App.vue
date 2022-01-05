@@ -9,7 +9,7 @@
     <main class="container flex-fill my-3">
       <router-view v-slot="{ Component }">
         <keep-alive max="1">
-          <component :is="Component"/>
+          <component :is="Component" />
         </keep-alive>
       </router-view>
     </main>
@@ -25,5 +25,3 @@ export default {
   name: 'App',
 };
 </script>
-
-<style scoped></style>

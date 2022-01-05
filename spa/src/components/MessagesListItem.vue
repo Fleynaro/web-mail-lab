@@ -11,7 +11,7 @@
       </template>
 
       <template v-slot:footer>
-        <message-clap-btn :message="message" @clap="$emit('clap')" class="ms-auto" />
+        <message-clap-btn :message="message" @clap="$emit('clap', $event)" class="ms-auto" />
       </template>
     </card>
   </li>
@@ -36,5 +36,3 @@ export default {
   emits: ['clap'],
 };
 </script>
-
-<style scoped></style>
