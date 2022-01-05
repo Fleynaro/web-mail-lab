@@ -44,9 +44,10 @@ export default {
   },
 
   methods: {
-    onClap() {
-      clapMessage(this.message.id).then((info) => {
-        this.message.claps = info.count;
+    onClap(btn) {
+      clapMessage(btn.message.id).then((info) => {
+        btn.message.claps = info.count;
+        btn.disabled = false;
       });
     },
   },
