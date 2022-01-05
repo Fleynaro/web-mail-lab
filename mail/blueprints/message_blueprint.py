@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from mail.entities.message_entity import Message
+from flask import session as flask_session
 
 from services.message_service import MessageService, ValidationError
 
@@ -57,3 +57,12 @@ def clap_message(message_id: int):
     if request.form['is_individual'] == 'True':
         return redirect(url_for('message.message_page', message_id=message_id))
     return redirect('/')
+
+
+@message_blueprint.post('/ajax')
+def ajax():
+    if 'ajax' in flask_session and flask_session['ajax']:
+        flask_session['ajax'] = False
+    else:
+        flask_session['ajax'] = True
+    return redirect(request.referrer)

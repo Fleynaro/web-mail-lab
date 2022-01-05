@@ -19,6 +19,21 @@
       </nav>
 
       <main class="container flex-fill my-3">
+        <div class="alert alert-secondary mb-3">
+          <form action="{{ url_for('message.ajax') }}" method="post">
+            <div class="d-flex align-items-center">
+              <button class="btn btn-secondary me-3">
+                {% if session['ajax'] %}
+                Отключить
+                {% else %}
+                Включить
+                {% endif %}
+              </button>
+              <div class="text-muted">Включить AJAX?</div>
+            </div>
+          </form>
+        </div>
+
         {% block main %}
         {% endblock %}
       </main>
@@ -31,5 +46,10 @@
     </div>
 
     <script src="{{ url_for('message.static', filename='script.js') }}"></script>
+    {% if session['ajax'] %}
+    <script>
+      init();
+    </script>
+    {% endif %}
   </body>
 </html>

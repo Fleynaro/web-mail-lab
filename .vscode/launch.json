@@ -16,7 +16,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:8080",
+            "url": "http://localhost:8081",
             "breakOnLoad": true,
             "pathMapping": {
                 "/static/message/": "${workspaceRoot}/mail/static",

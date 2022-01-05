@@ -160,7 +160,7 @@ async function handleClapSubmit(event) {
     if(form.disabled)
         return;
         
-    form.disabled = true;
+    form.querySelector('.btn').disabled = true;
 
     try {
         const newCount = await clapMessage(messageId);
@@ -184,7 +184,7 @@ async function handleClapSubmit(event) {
     } catch (error) {
         console.error(error);
     } finally {
-        form.disabled = false;
+        form.querySelector('.btn').disabled = false;
     }
 }
 
@@ -206,8 +206,4 @@ function init() {
     if(clapForm) {
         clapForm.addEventListener('submit', handleClapSubmit);
     }
-}
-
-if (window.confirm("Enable ajax?")) {
-    init();
 }
