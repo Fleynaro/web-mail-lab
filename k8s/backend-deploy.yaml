@@ -22,10 +22,6 @@ spec:
         image: fleynaro/web-mail-lab:backend-v0.4
         imagePullPolicy: IfNotPresent
         env:
-        - name: FLASK_ENV
-          value: "production"
-        - name: DEBUG
-          value: "0"
         - name: URL_PREFIX
           value: "/labs/mail"
         ports:
