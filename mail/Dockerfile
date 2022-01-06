@@ -1,7 +1,6 @@
-FROM python:3.7
+FROM tiangolo/uwsgi-nginx-flask:python3.8
 
-RUN mkdir /server
-WORKDIR /server
+WORKDIR /app
 
 COPY ./requirements.txt ./
 RUN pip install -r requirements.txt
@@ -10,7 +9,7 @@ COPY ./mail ./mail
 COPY ./shared ./shared
 COPY ./temp ./temp
 
-COPY ./start_mail_server.py ./
+COPY ./start_mail_server.py ./main.py
+RUN mv ./mail/uwsgi.ini ./uwsgi.ini
 
-EXPOSE 8081
-ENTRYPOINT ["python", "./start_mail_server.py"]
+ENV URL_PREFIX /labs/mail

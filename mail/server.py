@@ -35,8 +35,12 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 
+# init database
+init_db()
+
+
+# only for development (dont use in production!)
 def run():
-    init_db()
     app.run(
         host=os.environ.get('HOST', '0.0.0.0'),
         port=os.environ.get('PORT', 8081),
