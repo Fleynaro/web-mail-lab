@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mail-lab-deployment
+  name: mail-lab-back-deployment
   namespace: default
   labels:
     app: mail-lab
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: mail-lab
-        image: fleynaro/web-mail-lab:backend-v0.4
+        image: fleynaro/web-mail-lab:backend-v1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: URL_PREFIX
@@ -30,12 +30,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mail-lab-service
+  name: mail-lab-back-service
   namespace: default
 spec:
   selector:
     app: mail-lab
     type: backend
   ports:
-    - port: 8081
+    - port: 8080
       targetPort: 80

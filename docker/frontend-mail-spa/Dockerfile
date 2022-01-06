@@ -7,6 +7,8 @@ COPY ./spa/package*.json ./
 RUN npm install
 
 COPY ./spa ./
+ENV VUE_APP_BASE_URL=/labs/mail/spa
+ENV VUE_APP_API_URL=/labs/mail/api
 RUN npm run build
 
 

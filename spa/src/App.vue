@@ -7,6 +7,10 @@
     </nav>
 
     <main class="container flex-fill my-3">
+      <div class="alert alert-secondary mb-3">
+        <div class="text-muted"><a href="/labs/mail">Перейти</a> в традиционный Web</div>
+      </div>
+
       <router-view v-slot="{ Component }">
         <keep-alive max="1">
           <component :is="Component" />
