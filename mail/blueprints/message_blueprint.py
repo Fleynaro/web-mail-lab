@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
 from flask import session as flask_session
+from flask.helpers import url_for
 
 from services.message_service import MessageService, ValidationError
 
@@ -48,7 +49,7 @@ def add_message():
 def message_page(message_id: int):
     message = MessageService.get_message_by_id(message_id)
     if message is None:
-        return redirect(request.referrer)
+        return redirect(url_for('message.index'))
 
     return render_template('message_page.html',
         message=message,

@@ -146,9 +146,7 @@ async function handleClapSubmit(event) {
 
     const form = event.target;
     const messageId = form.dataset.message_id;
-    if(form.disabled)
-        return;
-        
+
     form.querySelector('.btn').disabled = true;
 
     try {
