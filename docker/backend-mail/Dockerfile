@@ -10,7 +10,7 @@ COPY ./shared ./shared
 COPY ./temp ./temp
 
 COPY ./start_mail_server.py ./main.py
-RUN mv ./mail/uwsgi.ini ./uwsgi.ini
+COPY ./docker/backend-mail/uwsgi.ini ./uwsgi.ini
 
 ENV URL_PREFIX /labs/mail
 
